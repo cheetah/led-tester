@@ -5,6 +5,8 @@
 #include <avr/interrupt.h>
 
 #include "ui.h"
+#include "modules/p10_1r.h"
+#include "modules/leder_3ini.h"
 
 UIClass ui;
 
@@ -17,6 +19,16 @@ int main() {
   }
 }
 
-ISR(INT0_vect) {
+ISR(INT2_vect) {
   ui.interrupt_handler();
 }
+
+/*leder_3ini module;
+
+int main() {
+  module.init();
+  while(1) {
+    module.shift(7);
+    module.test();
+  }
+}*/

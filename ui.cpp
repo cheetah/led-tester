@@ -6,16 +6,16 @@ void UIClass::init() {
   Buttons::SetConfiguration(Buttons::In);
   Leds::SetConfiguration(Leds::Out);
 
-  MCUCR |= ((0 << 0) | (1 << 1)); // Interrupts by falling front
-  GICR  |=  (1 << 6); // External interrupt enable
+  MCUCSR |= (0 << 6); // INT2, by falling front
+  GICR   |= (1 << 5); // INT2 enable
 
   read_settings();
 
-/*  ATOMIC {
+  ATOMIC {
     indicate(module);
     _delay_ms(3000);
     indicate(0);
-  }*/
+  }
 }
 
 void UIClass::handle() {

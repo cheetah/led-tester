@@ -11,10 +11,10 @@
 
 using namespace Mcucpp::IO;
 
-ISR(INT0_vect);
+ISR(INT2_vect);
 
 class UIClass {
-friend void INT0_vect();
+friend void INT2_vect();
 
 public:
   void init();
@@ -30,8 +30,8 @@ private:
   void read_settings();
   void write_settings();
 
-  typedef PinList<Pd0, Pd1, Pd3, Pd4> Buttons; // <R, G, B, S>
-  typedef PinList<Pd5, Pd6, Pd7> Leds; // <R, G, B>
+  typedef PinList<Pb0, Pb1, Pb3, Pb4> Buttons; // <R, G, B, S>
+  typedef PinList<Pb5, Pb6, Pb7> Leds; // <R, G, B>
 
   uint8_t module, led_flags, flags_store[2][2];
 
