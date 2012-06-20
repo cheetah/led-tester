@@ -13,12 +13,22 @@ using namespace Mcucpp::IO;
 
 ISR(INT2_vect);
 
+enum ui_status {
+  COLOR_CHANGED,
+  MODULE_CHANGED,
+  CONTINUE,
+  NOTHING,
+};
+
 class UIClass {
 friend void INT2_vect();
 
 public:
   void init();
-  void handle();
+  ui_status handle();
+
+  uint8_t get_module();
+  uint8_t get_colors();
 
 private:
   void interrupt_handler();

@@ -18,19 +18,35 @@ void UIClass::init() {
   }
 }
 
-void UIClass::handle() {
+ui_status UIClass::handle() {
   if(flags.settings_mode) {
     if(flags_changed_p(1)) { }
     blink();
+
+    return CONTINUE;
   } else {
     if(flags_changed_p(0)) {
       indicate(led_flags);
+
+      return COLOR_CHANGED;
     }
   }
 
   if(flags.settings_write) {
     write_settings();
+
+    return MODULE_CHANGED;
   }
+
+  return NOTHING;
+}
+
+uint8_t UIClass::get_module() {
+  return module;
+}
+
+uint8_t UIClass::get_colors() {
+  return flags_store[0][0];
 }
 
 void UIClass::toggle_settings_mode() {
@@ -87,7 +103,6 @@ void UIClass::write_settings() {
 }
 
 void UIClass::interrupt_handler() {
-  ATOMIC {
     uint8_t state = Buttons::PinRead();
     
     if((state & (1 << 0)) == 0) {
@@ -99,5 +114,4 @@ void UIClass::interrupt_handler() {
     } else if((state & (1 << 3)) == 0) {
       toggle_settings_mode();
     }
-  }
 }
