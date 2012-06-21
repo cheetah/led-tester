@@ -94,7 +94,7 @@ void UIClass::blink() {
 
 void UIClass::read_settings() {
   module = eeprom_read_byte(&ee_module);
-  //if(module > 7) module &= 0b00000111;
+  if(module > 7) module &= 0b00000111;
   flags_store[1][1] = module;
 }
 
