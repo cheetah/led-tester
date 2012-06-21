@@ -3,13 +3,11 @@
 void leder_3ini::init() {
   Led::SetConfiguration(Led::Out);
 
-  DDRB |= (1 << 1);
+  PWM::SetConfiguration(PWM::Port::Out);
 
-  TCCR1A |= ((0 << COM1A1) | (1 << COM1A0) | (0 << WGM11) | (0 << WGM10));
-  TCCR1B |= ((0 << WGM13)  | (1 << WGM12)  | (0 << CS12)  | (0 << CS11) | (1 << CS10));
-                
-  OCR1AH = 0;
-  OCR1AL = 0;
+  Timer1::Start(Timer1::Div1);
+  Timer1::SetMode(Timer1::ClearOnMatchOcr1a);
+  TCCR1A |= ((0 << COM1A1) | (1 << COM1A0));
 }
 
 void leder_3ini::enable() {
