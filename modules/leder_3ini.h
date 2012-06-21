@@ -24,12 +24,12 @@ private:
                   Pd0, Pd1, Pd2, Pd3, Pd4, Pd5> Led;
 
 
-  typedef Led::Pin<0> PinCON;
-  typedef Led::Pin<1> PinCLK;
-  typedef Led::Pin<2> PinLAT;
-  typedef Led::Pin<3> PinA;
-  typedef Led::Pin<4> PinB;
-  typedef Led::Pin<5> PinC;
+  typedef Led::Pin<0>  PinCON;
+  typedef Led::Pin<1>  PinCLK;
+  typedef Led::Pin<2>  PinLAT;
+  typedef Led::Pin<3>  PinA;
+  typedef Led::Pin<4>  PinB;
+  typedef Led::Pin<5>  PinC;
 
   typedef Led::Pin<6>  PinR1;
   typedef Led::Pin<7>  PinR2;
