@@ -2,8 +2,6 @@
 
 void p10_1r::init() {
   Led::SetConfiguration(Led::Out);
-
-  enable();
 }
 
 void p10_1r::enable() {
