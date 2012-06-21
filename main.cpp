@@ -24,8 +24,16 @@ void module_handle(uint8_t module_type) {
       module = new p10_1r;
       break;
 
+    case ld_p16f4_e:
+      module = new ld_p16f4;
+      break;
+
     case leder_3ini_e:
       module = new leder_3ini;
+      break;
+
+    case leder_xcph16_e:
+      module = new leder_xcph16;
       break;
 
     default:
