@@ -23,6 +23,8 @@ private:
   typedef PinList<Pc0, Pc1, Pc2, Pc3, Pc4, Pc5, \
                   Pd0, Pd1, Pd2, Pd3, Pd4, Pd5> Led;
 
+  typedef Led::Slice<3, 3> LedABC;
+  typedef Led::Slice<6, 6> LedData;
 
   typedef Led::Pin<0>  PinCON;
   typedef Led::Pin<1>  PinCLK;

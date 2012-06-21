@@ -10,8 +10,6 @@ void leder_3ini::init() {
                 
   OCR1AH = 0;
   OCR1AL = 0;
-
-  enable();
 }
 
 void leder_3ini::enable() {
@@ -27,51 +25,35 @@ void leder_3ini::shift(uint8_t state) {
 
   switch(state) {
     case 0:
-      PinR1::Clear(); PinR2::Clear();
-      PinG1::Clear(); PinG2::Clear();
-      PinB1::Clear(); PinB2::Clear();
+      LedData::Write<0>();     // 0b000000xxxxxx
       break;
 
     case 1:
-      PinR1::Set(); PinR2::Set();
-      PinG1::Clear(); PinG2::Clear();
-      PinB1::Clear(); PinB2::Clear();      
+      LedData::Write<0xC0>();  // 0b000011xxxxxx     
       break;
 
     case 2:
-      PinR1::Clear(); PinR2::Clear();
-      PinG1::Set(); PinG2::Set();
-      PinB1::Clear(); PinB2::Clear();
+      LedData::Write<0x300>(); // 0b001100xxxxxx
       break;
 
     case 3:
-      PinR1::Set(); PinR2::Set();
-      PinG1::Set(); PinG2::Set();
-      PinB1::Clear(); PinB2::Clear();
+      LedData::Write<0x3C0>(); // 0b001111xxxxxx
       break;
 
     case 4:
-      PinR1::Clear(); PinR2::Clear();
-      PinG1::Clear(); PinG2::Clear();
-      PinB1::Set(); PinB2::Set();
+      LedData::Write<0xC00>(); // 0b110000xxxxxx
       break;
 
     case 5:
-      PinR1::Set(); PinR2::Set();
-      PinG1::Clear(); PinG2::Clear();
-      PinB1::Set(); PinB2::Set();
+      LedData::Write<0xCC0>(); // 0b110011xxxxxx
       break;
 
     case 6:
-      PinR1::Clear(); PinR2::Clear();
-      PinG1::Set(); PinG2::Set();
-      PinB1::Set(); PinB2::Set();
+      LedData::Write<0xF00>(); // 0b111100xxxxxx
       break;
 
     case 7:
-      PinR1::Set(); PinR2::Set();
-      PinG1::Set(); PinG2::Set();
-      PinB1::Set(); PinB2::Set();
+      LedData::Write<0xFC0>(); // 0b111111xxxxxx
       break;
 
   }
@@ -94,33 +76,27 @@ void leder_3ini::shift(uint8_t state) {
 }
 
 void leder_3ini::test() {
-  PinA::Clear();
-  PinB::Clear();
-  PinC::Clear();
+  LedABC::Write<0>();    // 000xxx
   _delay_ms(1);
 
-  PinA::Set();
+  LedABC::Write<0x08>(); // 001xxx
   _delay_ms(1);
 
-  PinA::Clear();
-  PinB::Set();
+  LedABC::Write<0x10>(); // 010xxx
   _delay_ms(1);
 
-  PinA::Set();
+  LedABC::Write<0x18>(); // 011xxx
   _delay_ms(1);
 
-  PinA::Clear();
-  PinB::Clear();
-  PinC::Set();
+  LedABC::Write<0x20>(); // 100xxx
   _delay_ms(1);
 
-  PinA::Set();
+  LedABC::Write<0x28>(); // 101xxx
   _delay_ms(1);
 
-  PinA::Clear();
-  PinB::Set();
+  LedABC::Write<0x30>(); // 110xxx
   _delay_ms(1);
 
-  PinA::Set();
+  LedABC::Write<0x38>(); // 110xxx
   _delay_ms(1);
 }
