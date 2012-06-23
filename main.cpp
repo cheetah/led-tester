@@ -53,8 +53,6 @@ int main() {
   
   while(1) {
     if(ui_flag) {
-      module->disable();
-
       ui_status status = ui.handle();
       switch(status) {
         case COLOR_CHANGED:
@@ -82,6 +80,8 @@ int main() {
 
 ISR(INT2_vect) {
   ATOMIC {
+    module->disable();
+    _delay_ms(30);
     ui_flag = 1;
     ui.interrupt_handler();
   }
