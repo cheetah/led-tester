@@ -7,7 +7,7 @@ void leder_3ini::init() {
 
   Timer1::Start(Timer1::Div1);
   Timer1::SetMode(Timer1::ClearOnMatchOcr1a);
-  TCCR1A |= ((0 << COM1A1) | (1 << COM1A0));
+  TCCR1A |= ((0 << COM1B1) | (1 << COM1B0));
 }
 
 void leder_3ini::enable() {

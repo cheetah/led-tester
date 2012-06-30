@@ -20,7 +20,7 @@ public:
 
 private:
   
-  typedef PinList<Pc0, Pc1, Pc2, Pc3, Pc4, Pc5> Led;
+  typedef PinList<Pa6, Pa1, Pd0, Pa7, Pa5, Pd7> Led;
 
   typedef Led::Pin<0> PinOE;
   typedef Led::Pin<1> PinCLK;
