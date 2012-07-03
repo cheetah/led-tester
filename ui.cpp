@@ -6,8 +6,8 @@ void UIClass::init() {
   Buttons::SetConfiguration(Buttons::In);
   Leds::SetConfiguration(Leds::Out);
 
-  MCUCSR |= (0 << 6); // INT2, by falling front
-  GICR   |= (1 << 5); // INT2 enable
+  MCUCSR |= (0 << ISC2); // INT2, by falling front
+  GICR   |= (1 << INT2); // INT2 enable
 
   read_settings();
 
