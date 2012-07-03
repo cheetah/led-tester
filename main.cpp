@@ -16,7 +16,17 @@ uint8_t ui_flag = 0;
 
 ILed* module;
 
+inline void null_outputs() {
+  typedef PinList<Pa0, Pa1, Pa2, Pa3, Pa4, Pa5, Pa6, Pa7, \
+                  Pd0, Pd1, Pd2, Pd3, Pd4, Pd5, Pd6, Pd7> Outputs;
+
+  Outputs::SetConfiguration(Outputs::Out);
+  Outputs::Write<0>();
+}
+
 void module_handle(uint8_t module_type) {
+  null_outputs();
+
   delete module;
   
   switch(module_type) {
@@ -42,10 +52,13 @@ void module_handle(uint8_t module_type) {
   }
 
   module->init();
+  module->disable();
   module->shift(ui.get_colors());
 }
 
 int main() {
+  null_outputs();
+
   ui.init();
   module_handle(ui.get_module());
   
