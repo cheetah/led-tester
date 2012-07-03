@@ -5,6 +5,8 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
+#include <timers.h>
+
 #include "ui.h"
 #include "modules/list.h"
 
@@ -12,9 +14,11 @@ void *operator new(size_t size)  { return malloc(size); }
 void  operator delete(void *ptr) { if (ptr) free(ptr);  }
 
 UIClass ui;
-uint8_t ui_flag = 0;
+uint8_t ui_flag, timer_count = 0;
 
 ILed* module;
+
+using namespace Mcucpp::Timers;
 
 inline void null_outputs() {
   typedef PinList<Pa0, Pa1, Pa2, Pa3, Pa4, Pa5, Pa6, Pa7, \
@@ -58,6 +62,7 @@ void module_handle(uint8_t module_type) {
 
 int main() {
   null_outputs();
+  Timer0::EnableInterrupt();
 
   ui.init();
   module_handle(ui.get_module());
@@ -94,8 +99,23 @@ int main() {
 ISR(INT2_vect) {
   ATOMIC {
     module->disable();
-    _delay_ms(30);
+    GICR &= ~(1 << INT2);
     ui_flag = 1;
     ui.interrupt_handler();
+    Timer0::Start(Timer0::Div1024);
+  }
+}
+
+ISR(TIMER0_OVF_vect) {
+  ATOMIC {
+    if(timer_count == 1) {
+      Timer0::Stop();
+      timer_count = 0;
+
+      GIFR |=  (1 << INTF2);
+      GICR |=  (1 << INT2);
+    } else {
+      timer_count++;
+    }
   }
 }

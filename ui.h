@@ -1,4 +1,5 @@
 #include <math.h>
+#include <stdio.h>
 
 #include <avr/io.h>
 #include <avr/eeprom.h>
@@ -40,8 +41,17 @@ private:
   void read_settings();
   void write_settings();
 
+  uint8_t read_buttons();
+
   typedef PinList<Pb0, Pb1, Pb3, Pb4> Buttons; // <R, G, B, S>
   typedef PinList<Pb5, Pb6, Pb7> Leds; // <R, G, B>
+
+  enum buttons_e {
+    RED      = 0b1110,
+    GREEN    = 0b1101,
+    BLUE     = 0b1011,
+    SETTINGS = 0b0111,
+  };
 
   uint8_t module, led_flags, flags_store[2][2];
 

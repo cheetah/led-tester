@@ -103,16 +103,35 @@ void UIClass::write_settings() {
   flags.settings_write = 0;
 }
 
+uint8_t UIClass::read_buttons() {
+  uint8_t state = Buttons::PinRead();
+
+  while(state == 0b1111) {
+    state = Buttons::PinRead();
+  }
+
+  return state;
+}
+
 void UIClass::interrupt_handler() {
-    uint8_t state = Buttons::PinRead();
-    
-    if((state & (1 << 0)) == 0) {
+  switch(read_buttons()) {
+    case RED:
       led_flags ^= (1 << 0);
-    } else if((state & (1 << 1)) == 0) {
+      break;
+
+    case GREEN:
       led_flags ^= (1 << 1);
-    } else if((state & (1 << 2)) == 0) {
+      break;
+
+    case BLUE:
       led_flags ^= (1 << 2);
-    } else if((state & (1 << 3)) == 0) {
+      break;
+
+    case SETTINGS:
       toggle_settings_mode();
-    }
+      break;
+
+    default:
+      break;
+  }
 }
