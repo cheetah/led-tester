@@ -1,6 +1,6 @@
 #include "leder_3ini.h"
 
-void leder_3ini::init() {
+leder_3ini::leder_3ini() {
   Led::SetConfiguration(Led::Out);
 
   PWM::SetConfiguration(PWM::Port::Out);
@@ -8,6 +8,14 @@ void leder_3ini::init() {
   Timer1::Start(Timer1::Div1);
   Timer1::SetMode(Timer1::ClearOnMatchOcr1a);
   TCCR1A |= ((0 << COM1B1) | (1 << COM1B0));
+}
+
+leder_3ini::~leder_3ini() {
+  Led::Write<0>();
+  PWM::Clear();
+  
+  Timer1::Stop();
+  TCCR1A = 0;
 }
 
 void leder_3ini::enable() {

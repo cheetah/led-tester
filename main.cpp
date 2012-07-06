@@ -13,6 +13,8 @@
 void *operator new(size_t size)  { return malloc(size); }
 void  operator delete(void *ptr) { if (ptr) free(ptr);  }
 
+extern "C" { void __cxa_pure_virtual(void) {} };
+
 UIClass ui;
 uint8_t ui_flag, timer_count = 0;
 
@@ -29,8 +31,6 @@ inline void null_outputs() {
 }
 
 void module_handle(uint8_t module_type) {
-  null_outputs();
-
   delete module;
   
   switch(module_type) {
@@ -55,7 +55,6 @@ void module_handle(uint8_t module_type) {
       break;
   }
 
-  module->init();
   module->disable();
   module->shift(ui.get_colors());
 }

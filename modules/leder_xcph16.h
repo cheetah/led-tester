@@ -13,7 +13,9 @@ using namespace Mcucpp::IO;
 
 class leder_xcph16: public ILed {
 public:
-  void init();
+  leder_xcph16();
+  ~leder_xcph16();
+
   void shift(uint8_t state);
   void test();
   void enable();

@@ -14,7 +14,9 @@ using namespace Mcucpp::Timers;
 
 class leder_3ini: public ILed {
 public:
-  void init();
+  leder_3ini();
+  ~leder_3ini();
+  
   void shift(uint8_t state);
   void test();
   void enable();

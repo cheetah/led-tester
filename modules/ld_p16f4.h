@@ -13,7 +13,9 @@ using namespace Mcucpp::IO;
 
 class ld_p16f4: public ILed {
 public:
-  void init();
+  ld_p16f4();
+  ~ld_p16f4();
+
   void shift(uint8_t state);
   void test();
   void enable();

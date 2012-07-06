@@ -1,7 +1,11 @@
 #include "leder_xcph16.h"
 
-void leder_xcph16::init() {
+leder_xcph16::leder_xcph16() {
   Led::SetConfiguration(Led::Out);
+}
+
+leder_xcph16::~leder_xcph16() {
+  Led::Write<0>();
 }
 
 void leder_xcph16::enable() {
@@ -13,7 +17,7 @@ void leder_xcph16::disable() {
 }
 
 void leder_xcph16::shift(uint8_t state) {
-  int i;//, j, k;
+  int i;
 
   switch(state) {
     case 0:

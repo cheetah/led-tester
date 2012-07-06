@@ -3,7 +3,8 @@
 
 class ILed {
 public:
-  virtual void init() = 0;
+  virtual ~ILed() {};
+
   virtual void shift(uint8_t state) = 0;
   virtual void test() = 0;
   virtual void enable() = 0;

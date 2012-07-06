@@ -1,7 +1,11 @@
 #include "ld_p16f4.h"
 
-void ld_p16f4::init() {
+ld_p16f4::ld_p16f4() {
   Led::SetConfiguration(Led::Out);
+}
+
+ld_p16f4::~ld_p16f4() {
+  Led::Write<0>();
 }
 
 void ld_p16f4::enable() {
@@ -13,7 +17,7 @@ void ld_p16f4::disable() {
 }
 
 void ld_p16f4::shift(uint8_t state) {
-  int i;//, j, k;
+  int i;
 
   switch(state) {
     case 0:

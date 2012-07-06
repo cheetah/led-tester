@@ -1,7 +1,11 @@
 #include "p10_1r.h"
 
-void p10_1r::init() {
+p10_1r::p10_1r() {
   Led::SetConfiguration(Led::Out);
+}
+
+p10_1r::~p10_1r() {
+  Led::Write<0>();
 }
 
 void p10_1r::enable() {

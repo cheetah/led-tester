@@ -12,7 +12,9 @@ using namespace Mcucpp::IO;
 
 class p10_1r: public ILed {
 public:
-  void init();
+  p10_1r();
+  ~p10_1r();
+  
   void shift(uint8_t state);
   void test();
   void enable();
