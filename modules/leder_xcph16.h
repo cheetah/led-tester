@@ -23,7 +23,7 @@ public:
 
 private:
   
-  typedef PinList<Pd5, Pd6, Pd7, Pa6, Pa2, Pa7, Pa3, Pa4, Pa0> Led;
+  typedef PinList<Pd4, Pd6, Pd7, Pa6, Pa2, Pa7, Pa3, Pa4, Pa0> Led;
 
   typedef Led::Slice<3, 6> LedData;
 
