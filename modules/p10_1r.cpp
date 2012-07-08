@@ -29,7 +29,9 @@ void p10_1r::shift(uint8_t state) {
       break;
   }
 
-  for(i = 0; i < 32; i++) {
+  _delay_ms(5);
+
+  for(i = 0; i < 128; i++) {
     PinCLK::Set();
     PinCLK::Clear();
   }

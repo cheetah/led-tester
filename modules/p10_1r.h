@@ -22,7 +22,7 @@ public:
 
 private:
   
-  typedef PinList<Pa6, Pa1, Pd0, Pa7, Pa5, Pd7> Led;
+  typedef PinList<Pa6, Pa1, Pd0, Pa7, Pa5, Pd2> Led;
 
   typedef Led::Pin<0> PinOE;
   typedef Led::Pin<1> PinCLK;
